@@ -1,0 +1,615 @@
+﻿@{
+    ViewBag.Title = "BulletinBoardList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .佈告欄總表外框 {
+        background-color: white;
+        height: 1000px;
+        width: 1180px;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-bottom: 30px;
+        padding-top: 0;
+        box-shadow: 3px 3px 9px black;
+    }
+
+    .佈告欄列表 {
+        width: 1120px;
+        box-shadow: 3px 3px 9px black;
+    }
+
+        .佈告欄列表 th {
+            padding: 10px 10px;
+            text-align: center;
+            background-color: aqua;
+        }
+
+        .佈告欄列表 td {
+            padding: 10px 10px;
+            text-align: center;
+        }
+
+    .文字 {
+        font-size: 22px;
+        font-weight: 900;
+        text-align: center;
+    }
+
+    .文字2 {
+        font-size: 22px;
+        font-weight: 900;
+    }
+
+    .新增按鈕 {
+        margin-top: 30px;
+        margin-bottom:30px;
+        margin-left:-30px;
+        width: 120px;
+        font-size: 20px;
+        font-weight: 900;
+        display: inline-block;
+        box-shadow: 3px 3px 9px black;
+    }
+
+    .詳細按鈕 {
+        font-size: 20px;
+        font-weight: 900;
+    }
+
+    .addTitle {
+        max-width: 460PX;
+        width: 460px;
+        height: 30px;
+    }
+
+    .addContent {
+        max-width: 460PX;
+        width: 460px;
+        height: 150px;
+        resize: none;
+    }
+
+    .txt樣式 {
+        max-width: 460PX;
+        width: 460px;
+        height: 30px;
+    }
+
+    .外框 {
+        overflow-x: scroll;
+    }
+
+    .updateContent {
+        resize: none;
+        width: 460px;
+        height: 200px;
+        max-width: 460px;
+    }
+
+    .新增視窗頭 {
+        background-color: deepskyblue;
+    }
+
+    .編輯視窗頭 {
+        background-color: gold;
+    }
+
+    .搜尋 {
+        width: 400px;
+        margin-top: 30px;
+    }
+
+    .搜尋框 {
+        height: 50px;
+        width: 400px;
+        font-size: 18px;
+        font-weight: 900;
+    }
+    .搜尋按鈕 {
+        height: 50px;
+        width: 100px;
+        font-size: 18px;
+        font-weight: 900;
+    }
+
+    .打卡日曆 {
+        width:800px;
+        height:900px;
+    }
+</style>
+
+@*------------------------------資料夾Model起始------------------------------*@
+<nav class="mt-5 文字">
+    <div class="nav nav-tabs font-weight-bolder" id="nav-tab">
+        <a class="nav-item nav-link active text-dark" id="nav-home-tab" data-toggle="tab" href="#nav-1">佈告欄</a>
+        <a class="nav-item nav-link text-dark" id="nav-profile-tab" data-toggle="tab" href="#nav-2">行事曆</a>
+        <a class="nav-item nav-link text-dark" id="nav-profile-tab" data-toggle="tab" href="#nav3">打卡系統</a>
+    </div>
+</nav>
+@*------------------------------資料夾Model結束------------------------------*@
+@*佈告欄總表*@
+<div class="佈告欄總表外框">
+    <div class="tab-content" id="nav-tabContent">
+        <div id="nav-1" class="tab-pane fade show active">
+            <div class="col-12 d-flex justify-content-between">
+                <div class="col-7">
+                    <a class="btn btn-primary empedit 新增按鈕" data-id="" data-toggle="modal" data-target="#CreateBulletinBoardList">新增</a>
+                </div>
+                <div class="col-5">
+                    @*------------------------------搜尋框起始------------------------------*@
+                    <div class="ml-5 d-flex justify-content-center align-items-center 搜尋">
+                        <div>
+                            <input type="search" name="searchbox" class="searchbox rounded-pill border-info pl-3 搜尋框" placeholder="搜尋發佈人姓名..." />
+                        </div>
+                        <div class="ml-3">
+                            <button class="btn btn-primary rounded-pill searchbtn 搜尋按鈕" data-toggle="modal" data-target=".bd-example-modal-xl"><i class="fa fa-search mr-2"></i>搜尋</button>
+                        </div>
+                    </div>
+                    @*------------------------------搜尋彈跳視窗起始------------------------------*@
+                    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <table class="rounded-pill">
+                                    <thead>
+                                        <tr>
+                                            <th>佈告欄編號</th>
+                                            <th>發佈人</th>
+                                            <th>標題</th>
+                                            <th>內容</th>
+                                            <th>發佈日期</th>
+                                            <th>編輯</th>
+                                            <th>刪除</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="SearchShowTable">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    @*------------------------------搜尋彈跳視窗結束------------------------------*@
+                    @*------------------------------搜尋框結束------------------------------*@
+                </div>
+            </div>
+            <div class="外框">
+                <table class="table table-bordered table-hover text-nowrap 佈告欄列表">
+                    <thead class="THeadAdd 文字">
+                    </thead>
+                    <tbody class="TBodyAdd 文字">
+                    </tbody>
+                </table>
+                @*------------------------------分頁按鈕起始------------------------------*@
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center arrowborn">
+                    </ul>
+                    <p class="currentpage"></p>
+                </nav>
+                @*------------------------------分頁按鈕結束------------------------------*@
+            </div>
+        </div>
+        <div id="nav-2" class="tab-pane fade active ">
+            @*------------------------------Fullcalender起始------------------------------*@
+            <div id='calendar' class="pt-5"></div>
+            @*------------------------------Fullcalender結束------------------------------*@
+        </div>
+        <div id="nav-3" class="tab-pane fade show active ">
+            @*------------------------------Fullcalender起始------------------------------*@
+            <div id='calendar' class="pt-5 打卡日曆"></div>
+            @*------------------------------Fullcalender結束------------------------------*@
+        </div>
+    </div>
+</div>
+@*------------------------------Fullcalender新增彈跳視窗結束------------------------------*@
+
+@*新增彈跳視窗*@
+<div class="modal fade" id="CreateBulletinBoardList" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header 新增視窗頭">
+                <h5 class="modal-title 文字2" id="exampleModalLabel">新增佈告欄</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="CreateBulletinBoard">
+                    <label class="文字2">標題：</label>
+                    <br>
+                    <input name="Title" type="text" class="addTitle" />
+                    <br>
+                    <br>
+                    <label class="文字2">內容：</label>
+                    <br>
+                    <textarea name="Content" class="addContent" rows="5" cols="200">
+                    </textarea>
+                    <br>
+                    <br>
+                    <label class="文字2">發佈日期：</label>
+                    <br>
+                    <input name="Date" type="datetime-local" class="addDate" />
+                    <br>
+                    <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary editsave" data-dismiss="modal" onclick="BulletinBoardAdd()">送出</button>
+                <button type="button" class="btn btn-secondary ClearModal" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*指定單筆搜尋彈跳視窗*@
+<div class="modal fade" id="EditBulletinBoard" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header 編輯視窗頭">
+                <h5 class="modal-title 文字2" id="exampleModalLabel">編輯佈告欄</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="EditUserProfile"></form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary editsave" data-dismiss="modal">確認修改</button>
+                <button type="button" class="btn btn-secondary ClearModal" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section script{
+    <script>
+        refresh();
+
+        // 刷新
+        var count = 1;
+        var page_num = 1;
+        var TotalEMP = "";
+        var SliceTotal = "";
+        var currentpage = page_num;
+
+        function refresh() {
+            $.ajax({
+                url: "/BulletinBoard/BulletinBoardList", // 使用方法路徑
+                method: "get",
+                success: function (data) {
+                    $(".THeadAdd").html(`
+                                                                        <tr>
+                                                                        <th>佈告欄編號</th>
+                                                                        <th>發佈人</th>
+                                                                        <th>標題</th>
+                                                                        <th>內容</th>
+                                                                        <th>發佈日期</th>
+                                                                        <th>編輯</th>
+                                                                        <th>刪除</th>
+                                                                        </tr>
+                                                                        `)
+                    var a = "";  // 使用一個空字串
+                    $(data).each(function (index, item) {
+                        let datetime = new Date(parseInt(item.發布日期.slice(6, -2)));
+                        a += ` <tr>
+                                                            <td>${item.佈告欄ID}</td>
+                                                            <td>${item.中文姓名}</td>
+                                                            <td>${item.佈告欄標題}</td>
+                                                            <td>${item.佈告欄內容}</td>
+                                                            <td>${datetime.getFullYear() + "/" + (datetime.getMonth() + 1) + "/" + datetime.getDate() + " " + datetime.getHours() + ":" + datetime.getMinutes()}</td>
+                                                            <td><a class="btn btn-warning empedit 詳細按鈕" data-id="${item.佈告欄ID}" data-toggle="modal" data-target="#EditBulletinBoard" onclick="startedit()">編輯</a></td>
+                                                            <td><a class="btn btn-danger empedit 詳細按鈕" data-id="${item.佈告欄ID}" data-toggle="modal" onclick="DeleteBB()">刪除</a></td>
+                                                        </tr>`;
+                    })
+                    $(".TBodyAdd").html(a); // 取代原本內容
+
+                    $(".currentpage").html(`當前頁面：${page_num}`);
+                    TotalEMP = data[0].總比數;
+                    SliceTotal = Math.ceil(TotalEMP / 10);
+                    $(".arrowborn").empty();
+                    $(".arrowborn").append(` <li class="page-item pointer prevbtn" value="${page_num}">
+                                            <a class="page-link ">Previous</a>
+                                        </li>`);
+                    $(".arrowborn").append(
+                        ` <li class="page-item pointer firstbtn" value="${page_num}"><a class="page-link showbtn1">${page_num}</a></li>`
+                    );
+                    $(".arrowborn").append(
+                        ` <li class="page-item pointer sectbtn" value="${page_num + 1}"><a class="page-link showbtn2">${page_num + 1}</a></li>`
+                    );
+                    $(".arrowborn").append(
+                        ` <li class="page-item pointer thirdtbtn" value="${page_num + 2}"><a class="page-link showbtn3">${page_num + 2}</a></li>`
+                    );
+
+                    $(".arrowborn").append(` <li class="page-item pointer nextbtn" value="${page_num + 1}">
+                                            <a class="page-link">Next</a>
+                                        </li>`);
+                }
+            })
+        }
+
+
+        //----------------------分頁跳轉起始----------------------
+        //動態bind事件的話要用on事先綁定父層
+
+        $(".arrowborn").on('click', '.firstbtn', function () {
+            $(".currentpage").html(`當前頁面：${$(this).attr("value")}`);
+
+            if (page_num == SliceTotal) {
+                $(".firstbtn").attr('value', currentpage = page_num - 2);
+            } else {
+
+                $(".firstbtn").attr('value', currentpage = page_num + 0);
+
+            }
+            $(".firstbtn").off('click');
+        })
+        $(".arrowborn").on('click', '.sectbtn', function () {
+            $(".currentpage").html(`當前頁面：${$(this).attr("value")}`);
+
+            if (page_num == SliceTotal) {
+                $(".sectbtn").attr('value', currentpage = page_num - 1);
+            } else {
+
+                $(".sectbtn").attr('value', currentpage = page_num + 1);
+            }
+            $(".sectbtn").off('click');
+
+        })
+
+        $(".arrowborn").on('click', '.thirdtbtn', function () {
+
+            $(".currentpage").html(`當前頁面：${$(this).attr("value")}`);
+
+            if (page_num == SliceTotal) {
+                $(".thirdtbtn").attr('value', currentpage = page_num + 0);
+            } else {
+
+                $(".thirdtbtn").attr('value', currentpage = page_num + 2);
+
+            }
+            $(".thirdtbtn").off('click');
+        });
+
+        $(".arrowborn").on('click', '.nextbtn', function () {
+            if (page_num < SliceTotal - 2) {
+                $(".nextbtn").attr('value', page_num++)
+            }
+            $(".nextbtn").off('click');
+        });
+
+        $(".arrowborn").on('click', '.prevbtn', function () {
+            if (page_num > 1) {
+                $(".prevbtn").attr('value', page_num--);
+            }
+            $(".prevbtn").off('click');
+        });
+
+        $(".arrowborn").on('click', '.page-item', function () {
+
+            if (page_num == SliceTotal) {
+                $(".showbtn1").html(page_num - 2);
+                $(".showbtn2").html(page_num - 1);
+                $(".showbtn3").html(page_num);
+            } else {
+                $(".showbtn1").html(page_num);
+                $(".showbtn2").html(page_num + 1);
+                $(".showbtn3").html(page_num + 2);
+            }
+
+            $.ajax({
+                url: "/BulletinBoard/BBPage",
+                data: {
+                    "arrow": currentpage
+                },
+                success: function (data) {
+                    $(".THeadAdd").html(`
+                                                                        <tr>
+                                                                        <th>佈告欄編號</th>
+                                                                        <th>發佈人</th>
+                                                                        <th>標題</th>
+                                                                        <th>內容</th>
+                                                                        <th>發佈日期</th>
+                                                                        <th>編輯</th>
+                                                                        <th>刪除</th>
+                                                                        </tr>
+                                                                        `)
+                    var a = "";  // 使用一個空字串
+                    $(data).each(function (index, item) {
+                        let datetime = new Date(parseInt(item.發布日期.slice(6, -2)));
+                        a += ` <tr>
+                                                            <td>${item.佈告欄ID}</td>
+                                                            <td>${item.中文姓名}</td>
+                                                            <td>${item.佈告欄標題}</td>
+                                                            <td>${item.佈告欄內容}</td>
+                                                            <td>${datetime.getFullYear() + "/" + (datetime.getMonth() + 1) + "/" + datetime.getDate() + " " + datetime.getHours() + ":" + datetime.getMinutes()}</td>
+                                                            <td><a class="btn btn-warning empedit 詳細按鈕" data-id="${item.佈告欄ID}" data-toggle="modal" data-target="#EditBulletinBoard" onclick="startedit()">編輯</a></td>
+                                                            <td><a class="btn btn-danger empedit 詳細按鈕" data-id="${item.佈告欄ID}" data-toggle="modal" onclick="DeleteBB()">刪除</a></td>
+                                                        </tr>`;
+                    })
+                    $(".TBodyAdd").html(a); // 取代原本內容
+
+                    TotalEMP = data[0].總比數;
+                    SliceTotal = Math.ceil(TotalEMP / 10);
+                    $(".arrowborn").empty();
+                    $(".arrowborn").append(` <li class="page-item pointer prevbtn" value="${page_num}">
+                                            <a class="page-link ">Previous</a>
+                                        </li>`);
+                    $(".arrowborn").append(
+                        ` <li class="page-item pointer firstbtn" value="${page_num}"><a class="page-link showbtn1">${page_num}</a></li>`
+                    );
+                    $(".arrowborn").append(
+                        ` <li class="page-item pointer sectbtn" value="${page_num + 1}"><a class="page-link showbtn2">${page_num + 1}</a></li>`
+                    );
+                    $(".arrowborn").append(
+                        ` <li class="page-item pointer thirdtbtn" value="${page_num + 2}"><a class="page-link showbtn3">${page_num + 2}</a></li>`
+                    );
+
+                    $(".arrowborn").append(` <li class="page-item pointer nextbtn" value="${page_num + 1}">
+                                            <a class="page-link">Next</a>
+                                        </li>`);
+                }
+            })
+            $('.page-item').off('click');
+        });
+
+
+        //----------------------分頁跳轉結束----------------------
+
+        // 新增方法
+        function BulletinBoardAdd() {
+            $.ajax({
+                url: "/BulletinBoard/CreateBulletinBoard",
+                data: {
+                    "佈告欄標題": $(".addTitle").val(),
+                    "佈告欄內容": $(".addContent").val(),
+                    "發布日期": $(".addDate").val()
+                },
+                method: "Get",
+                success: function (data) {
+                    swal("新增成功~!", "佈告欄已新增成功~~!!!", "success");
+                    refresh();
+                }
+            });
+        };
+
+        // 指定單筆資料
+
+        function startedit() {
+            $.ajax({
+                url: "/BulletinBoard/SearchOneBulletinBoard",
+                method: "Get",
+                data: { "id": $(event.currentTarget).data("id") },
+                success: function (data) {
+                    let datetime = new Date(parseInt(data.發布日期.slice(6, -2)));
+                    $(".EditUserProfile").html(`
+                                                                        <div class="d-flex justify-content-center">
+                                                                            <div class="mr-1">
+                                                                                <div class="文字2">佈告欄編號：</div>
+                                                                                <input name="BulletinBoardID" type="text" class="updateBBID 不能修改 txt樣式" disabled value="${data.佈告欄ID}"/>
+                                                                                 <br>
+                                                                                 <br>
+                                                                                <input name="EmployeeID" type="hidden" class="updateEPID txt樣式" value="${data.EmployeeID}"/>
+                                                                                <div class="文字2">發佈人：</div>
+                                                                                <input name="發佈人姓名" type="text" class="updateBBName txt樣式" value="${data.中文姓名}" disabled/>
+                                                                                <br>
+                                                                                <br>
+                                                                                <div class="文字2">標題：</div>
+                                                                                <input name="Title" type="text" class="updateTitle txt樣式" value="${data.佈告欄標題}"/>
+                                                                                <br>
+                                                                                <br>
+                                                                                <div class="文字2">內容:   </div>
+                                                                                <textarea name="Content" class="updateContent">${data.佈告欄內容}</textarea>
+                                                                                <br>
+                                                                                <br>
+                                                                                <div class="文字2">發佈日期:  </div>
+                                                                                <input name="Date" type="text" class="updateTime txt樣式" value="${datetime.getFullYear() + "/" + (datetime.getMonth() + 1) + "/" + datetime.getDate() + " " + datetime.getHours() + ":" + datetime.getMinutes()}"/>
+                                                                                <br>
+                                                                                <br>
+                                                                            </div>
+                                                                        </div>`);
+                }
+            });
+        };
+
+        // 修改方法
+        $(".editsave").click(function () {
+            $.ajax({
+                url: "/BulletinBoard/BulletinBoardEdit",
+                method: "Post",
+                data: {
+                    "佈告欄ID": $(".updateBBID").val(),
+                    "EmployeeID": $(".updateEPID").val(),
+                    "中文姓名": $(".updateBBName").val(),
+                    "佈告欄標題": $(".updateTitle").val(),
+                    "佈告欄內容": $(".updateContent").val(),
+                    "發布日期": $(".updateTime").val()
+                },
+                success: function (data) {
+                    swal("修改成功~!", "佈告欄已修改成功~~!!!", "success");
+                    refresh();
+                }
+            });
+        })
+
+        // 刪除方法
+        function DeleteBB() {
+            $.ajax({
+                url: "/BulletinBoard/BulletinBoardDelete",
+                method: "get",
+                data: {
+                    "id": $(event.currentTarget).data("id")
+                },
+                success: function () {
+                    swal({
+                        title: "刪除?",
+                        text: "確定要刪除嗎?",
+                        icon: 'warning',
+                        buttons: true,
+                        dangerMode: true,
+                    }).then((confirm) => {
+                        if (confirm) {
+                            swal('刪除', '刪除成功！...', 'success');
+                            refresh();
+                        } else {
+                            swal('刪除', '刪除失敗!...', 'error');
+                        }
+                    })
+                }
+            })
+        }
+
+        //----------------------佈告欄搜尋按鈕起始----------------------
+        $(".searchbtn").click(function () {
+            $.ajax({
+                url: "/BulletinBoard/BulletinBoardSearch",
+                data: {
+                    "name": $(".searchbox").val()
+                },
+                success: function (data) {
+                    var a = ""
+                    $(data).each(function (index, item) {
+                        let datetime = new Date(parseInt(item.發布日期.slice(6, -2)));
+                        a += `<tr>
+                                                        <td>${item.佈告欄ID}</td>
+                                                        <td>${item.中文姓名}</td>
+                                                        <td>${item.佈告欄標題}</td>
+                                                        <td>${item.佈告欄內容}</td>
+                                                        <td>${datetime.getFullYear() + "/" + (datetime.getMonth() + 1) + "/" + datetime.getDate() + " " + datetime.getHours() + ":" + datetime.getMinutes()}</td>
+                                                        <td><a class="btn btn-warning empedit 詳細按鈕" data-id="${item.佈告欄ID}" data-toggle="modal" data-target="#EditBulletinBoard" onclick="startedit()">編輯</a></td>
+                                                        <td><a class="btn btn-danger empedit 詳細按鈕" data-id="${item.佈告欄ID}" data-toggle="modal" onclick="DeleteBB()">刪除</a></td>
+                                                        </tr>`;
+                        $(".SearchShowTable").html(a)
+                    })
+                }
+            })
+        });
+        //----------------------佈告欄搜尋按鈕結束----------------------
+
+
+        ///-------Fullcalender---------
+        document.addEventListener('DOMContentLoaded', function () {
+            var initialLocaleCode = 'zh-tw';
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                headerToolbar: {
+                    left: 'prevYear,prev,next,nextYear today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                },
+                locale: initialLocaleCode,
+                buttonIcons: false, // show the prev/next text
+                navLinks: true, // can click day/week names to navigate views
+                editable: true,
+                dayMaxEvents: true, // allow "more" link when too many events
+                businessHours: true, // display business hours
+                selectable: true,
+                
+            });
+            calendar.render();
+        });
+
+    </script>
+}
