@@ -34,10 +34,9 @@ namespace EIP.Models
         public string 電話 { get; set; }
         public string 居住地 { get; set; }
         public string 婚姻狀況 { get; set; }
-        public string 年資 { get; set; }
         public string 薪資 { get; set; }
         public string 特休 { get; set; }
-        public string 權限 { get; set; }
+        public Nullable<int> 權限 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<projectTeam> projectTeam { get; set; }

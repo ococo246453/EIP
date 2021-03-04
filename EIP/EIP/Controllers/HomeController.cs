@@ -59,7 +59,6 @@ namespace EIP.Controllers
                 Response.Cookies["AutoLg"]["id"] = mmb.EmployeeID.ToString();
                 Response.Cookies["AutoLg"]["Name"] = Server.UrlEncode(mmb.中文姓名);
                 Response.Cookies["AutoLg"]["Auth"] = Server.UrlEncode(mmb.職稱);
-                Response.Cookies["AutoLg"]["Power"] = Server.UrlEncode(mmb.權限);
                 if (LoginVM.RememberMe)
                 {
                     Response.Cookies["AutoLg"].Expires = DateTime.Now.AddDays(30);
@@ -91,7 +90,6 @@ namespace EIP.Controllers
                 電話 = UserProfile.電話,
                 居住地 = UserProfile.居住地,
                 婚姻狀況 = UserProfile.婚姻狀況,
-                年資 = UserProfile.年資,
                 特休 = UserProfile.特休,
                 薪資 = UserProfile.薪資,
                 權限 = UserProfile.權限
@@ -125,7 +123,6 @@ namespace EIP.Controllers
                           電話 = m.電話,
                           居住地 = m.居住地,
                           婚姻狀況 = m.婚姻狀況,
-                          年資 = m.年資,
                           特休 = m.特休,
                           薪資 = m.薪資,
                           權限 = m.權限,
@@ -156,7 +153,6 @@ namespace EIP.Controllers
                 電話 = EditProfile.電話,
                 居住地 = EditProfile.居住地,
                 婚姻狀況 = EditProfile.婚姻狀況,
-                年資 = EditProfile.年資,
                 特休 = EditProfile.特休,
                 薪資 = EditProfile.薪資,
                 權限 = EditProfile.權限,
@@ -184,7 +180,6 @@ namespace EIP.Controllers
                 電話 = mlvm.電話,
                 居住地 = mlvm.居住地,
                 婚姻狀況 = mlvm.婚姻狀況,
-                年資 = mlvm.年資,
                 特休 = mlvm.特休,
                 薪資 = mlvm.薪資,
                 權限 = mlvm.權限
@@ -213,7 +208,6 @@ namespace EIP.Controllers
                 電話 = mlvm.電話,
                 居住地 = mlvm.居住地,
                 婚姻狀況 = mlvm.婚姻狀況,
-                年資 = mlvm.年資,
                 特休 = mlvm.特休,
                 薪資 = mlvm.薪資,
                 權限 = mlvm.權限,
@@ -262,7 +256,6 @@ namespace EIP.Controllers
                           電話 = m.電話,
                           居住地 = m.居住地,
                           婚姻狀況 = m.婚姻狀況,
-                          年資 = m.年資,
                           特休 = m.特休,
                           薪資 = m.薪資,
                           權限 = m.權限

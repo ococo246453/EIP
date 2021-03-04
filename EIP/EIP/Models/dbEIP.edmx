@@ -116,11 +116,10 @@
           <Property Name="信箱" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="電話" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="居住地" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="婚姻狀況" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="年資" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="婚姻狀況" Type="nvarchar" MaxLength="50" />
           <Property Name="薪資" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="特休" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="權限" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="權限" Type="int" />
         </EntityType>
         <EntityType Name="假別">
           <Key>
@@ -350,11 +349,10 @@
           <Property Name="信箱" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="電話" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="居住地" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="婚姻狀況" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="年資" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="婚姻狀況" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="薪資" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="特休" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="權限" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="權限" Type="Int32" />
           <NavigationProperty Name="projectTeam" Relationship="dbEIPModel.FK_projectTeam_個人資料" FromRole="個人資料" ToRole="projectTeam" />
         </EntityType>
         <EntityType Name="假別">
@@ -534,7 +532,6 @@
                 <ScalarProperty Name="權限" ColumnName="權限" />
                 <ScalarProperty Name="特休" ColumnName="特休" />
                 <ScalarProperty Name="薪資" ColumnName="薪資" />
-                <ScalarProperty Name="年資" ColumnName="年資" />
                 <ScalarProperty Name="婚姻狀況" ColumnName="婚姻狀況" />
                 <ScalarProperty Name="居住地" ColumnName="居住地" />
                 <ScalarProperty Name="電話" ColumnName="電話" />

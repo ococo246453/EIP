@@ -108,7 +108,6 @@
           <ScalarProperty Name="權限" ColumnName="權限" />
           <ScalarProperty Name="特休" ColumnName="特休" />
           <ScalarProperty Name="薪資" ColumnName="薪資" />
-          <ScalarProperty Name="年資" ColumnName="年資" />
           <ScalarProperty Name="婚姻狀況" ColumnName="婚姻狀況" />
           <ScalarProperty Name="居住地" ColumnName="居住地" />
           <ScalarProperty Name="電話" ColumnName="電話" />

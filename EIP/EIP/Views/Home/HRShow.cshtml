@@ -87,6 +87,17 @@
                         <label>英文姓名：</label>
                         <input type="text" class="adden form-control shadow-sm" />
                     </div>
+                   
+                </div>
+                <div class="mx-auto mt-3 col-12 col-sm-12 col-md-6 col-lg-2">
+                    <div class="form-group">
+                        <label>出生年月日：</label>
+                        <input type="text" class="addbirth form-control shadow-sm" />
+                    </div>
+                    <div class="form-group">
+                        <label>部門：</label>
+                        <input type="text" class="addpart form-control shadow-sm" />
+                    </div>
                     <div class="form-group">
                         <label>職稱：</label>
                         <select class="addjob form-control shadow-sm">
@@ -96,24 +107,8 @@
                             <option value="人事">人事</option>
                         </select>
                     </div>
-                </div>
-                <div class="mx-auto mt-3 col-12 col-sm-12 col-md-6 col-lg-2">
-                    <div class="form-group">
-                        <label>部門：</label>
-                        <input type="text" class="addpart form-control shadow-sm" />
-                    </div>
-                    <div class="form-group">
-                        <label>性別：</label>
-                        <select class="addsex form-control shadow-sm">
-                            <option value="性別" disabled selected>性別</option>
-                            <option value="男">男</option>
-                            <option value="女">女</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>出生年月日：</label>
-                        <input type="text" class="addbirth form-control shadow-sm" />
-                    </div>
+                   
+
                     <div class="form-group">
                         <label>電話：</label>
                         <input type="text" class="addphone form-control shadow-sm" />
@@ -136,6 +131,17 @@
                         <input type="text" class="live">
                     </div>
 
+
+                </div>
+                <div class="mx-auto mt-3  col-12 col-sm-12 col-md-6 col-lg-2">
+                    <div class="form-group">
+                        <label>性別：</label>
+                        <select class="addsex form-control shadow-sm">
+                            <option value="性別" disabled selected>性別</option>
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label>婚姻狀況：</label>
                         <select class="addmerry form-control shadow-sm">
@@ -145,12 +151,6 @@
                         </select>
 
                     </div>
-                </div>
-                <div class="mx-auto mt-3  col-12 col-sm-12 col-md-6 col-lg-2">
-                    <div class="form-group">
-                        <label>年資：</label>
-                        <input type="text" class="addyearpay form-control shadow-sm" />
-                    </div>
                     <div class="form-group">
                         <label>薪資：</label>
                         <input type="text" class="addpayment form-control shadow-sm" />
@@ -159,15 +159,7 @@
                         <label>特休：</label>
                         <input type="text" class="addspvaction form-control shadow-sm" />
                     </div>
-                    <div class="form-group">
-                        <label>權限：</label>
-                        <select class="addpower form-control shadow-sm">
-                            <option value="管理權限" disabled selected>管理權限</option>
-                            <option value="主管">主管</option>
-                            <option value="員工">員工</option>
-                            <option value="人事">人事</option>
-                        </select>
-                    </div>
+
                     <div class="form-group">
                         <label>在職狀態：</label>
                         <select class="addstatus form-control shadow-sm">
@@ -180,7 +172,7 @@
                     </div>
                     <div class="mt-5">
                         <div class="form-group">
-                            <input type="button" class="btn btn-primary w-100 AddEMP shadow-sm" value="確認送出" />
+                            <input type="button" class="btn btn-primary w-100 AddEMP shadow-sm " value="確認送出" />
                             <input type="reset" class="resetform" hidden />
                         </div>
                     </div>
@@ -225,7 +217,7 @@
     </div>
     @*------------------------------編輯個人資訊起始------------------------------*@
     <div class="modal fade" id="EditProfile" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title FormTextShadow" id="exampleModalLabel">編輯員工資訊</h5>
@@ -476,86 +468,125 @@
                 method: "Get",
                 success: function (data) {
                     $(".EditUserProfile").html(`
-                                <div class="d-flex row flex-wrap space">
-            <div>
-                                    <input type="hidden"name="EmployeePW" class="" value="${data.EmployeePW}"/>
-                                    <input type="hidden" name="EmployeeID" class="" value="${data.EmployeeID}"/>
-                                    <input type="hidden"name="信箱" class="" value="${data.信箱}"/>
+ <div class="d-flex flex-wrap space justify-content-start">
+    <div>
+        <input type="hidden" name="EmployeePW" class="" value="${data.EmployeePW}" />
+        <input type="hidden" name="EmployeeID" class="" value="${data.EmployeeID}" />
+        <input type="hidden" name="信箱" class="" value="${data.信箱}" />
+    </div>
+    <div class="d-flex ml-5">
+        <div>
             <ul class="list-unstyled">
-                                <li><label>中文姓名：</label><input name="中文姓名" class="Regular shadow"value="${data.中文姓名}"/></li>
-                        <li class="mt-3">
-                                <li><label>英文姓名：</label><input name="英文姓名" class="Regular shadow"value="${data.英文姓名}"/></li>
-            </li>
-             <li class="mt-3">
-                                    <label>性別：</label>
-                                        <select hidden name="性別" class="Regular shadow">
-                                            <option >${data.性別}</option>
-                                        </select>
-
-                                        <select disabled class="Regular shadow">
-                                            <option >${data.性別}</option>
-                                        </select>
-            </li>
-                  <li class="mt-3">
-                                    <label>電話：</label><input name="電話" class="Regular shadow"value="${data.電話}"/>
-                    </li>
-                      <li class="mt-3">
-                                    <label>出生年月日：</label><input name="出生年月日" class="Regular shadow"value="${data.出生年月日}"/>
-                   </li>
+                <li><label>中文姓名：</label></li>
                 <li class="mt-3">
-                                        <label>婚姻狀況：</label>
-                                        <select  name="婚姻狀況" class="Regular shadow">
-                                            <option hidden>${data.婚姻狀況}</option>
-                                            <option value="已婚">已婚</option>
-                                            <option value="未婚">未婚</option>
-                                        </select>
-               </li>
-                    <li class="mt-3">
-                                   <label> 居住地：</label><input  name="居住地"class="txtlive Regular shadow"value="${data.居住地}"/>
-                   </li>
-                                    </div>
+                <li><label>英文姓名：</label></li>
+                </li>
+                <li class="mt-3">
+                    <label>性別：</label>
+                </li>
+                <li class="mt-3">
+                    <label>電話：</label>
+                </li>
+                <li class="mt-3">
+                    <label>出生年月日：</label>
+                </li>
+                <li class="mt-3">
+                    <label>婚姻狀況：</label>
+        </div>
+        </ul>
+    </div>
+    <div>
+        <ul class="list-unstyled">
+            <li>
+                <input name="中文姓名" class="Regular shadow" value="${data.中文姓名}" />
+            </li>
+            <li class="mt-3">
+                <input name="英文姓名" class="Regular shadow" value="${data.英文姓名}" />
+            </li>
+            <li class="mt-3">
+                <select hidden name="性別" class="Regular shadow">
+                    <option>${data.性別}</option>
+                    <input type="text" disabled value="${data.性別}" />
+                </select>
+            </li>
+            <li class="mt-3">
+                <input name="電話" class="Regular shadow" value="${data.電話}" />
+            </li>
+            <li class="mt-3">
+                <input name="出生年月日" class="Regular shadow" value="${data.出生年月日}" />
+            </li>
+            <li class="mt-4">
+                <select name="婚姻狀況" class="Regular shadow">
+                    <option hidden>${data.婚姻狀況}</option>
+                    <option value="已婚">已婚</option>
+                    <option value="未婚">未婚</option>
+                </select>
+        </ul>
+    </div>
+
+
+
+    <div class="ml-5 d-flex">
+        <div>
+            <ul class="list-unstyled">
+                <li>
+                    <label> 受雇日期：</label>
+                </li>
+                <li class="mt-3">
+                    <label> 部門：</label>
+                </li>
+                <li class="mt-3">
+                    <label>職稱：</label>
+                </li>
+                <li class="mt-4">
+                    <label>特休：</label>
+                </li>
+                <li class="mt-4">
+                    <label> 薪資：</label>
+                </li>
+                </li>
+                <li class="mt-3">
+                    <label> 居住地：</label>
+                </li>
             </ul>
-                                    <div">
+        </div>
+        <div class="mr-4">
             <ul class="list-unstyled">
-                   <li>
-                                    受雇日期：<input name="受雇日期" hidden class="Regular shadow"value="${data.受雇日期}"/>
-                                    <input  disabled class="Regular shadow"value="${data.受雇日期}"/>
-                   </li>
+                <li>
+                    <input disabled class="Regular shadow" value="${data.受雇日期}" />
+                    <input name="受雇日期" hidden class="Regular shadow" value="${data.受雇日期}" />
+                </li>
                 <li class="mt-3">
-                                    部門：<input name="部門" class="Regular shadow" value="${data.部門}"/>
-                   </li>
-                     <li class="mt-3">
-                                        <label>職稱：</label>
-                                        <select name="職稱" class="Regular shadow">
-                                            <option hidden>${data.職稱}</option>
-                                            <option value="主管">主管</option>
-                                            <option value="員工">員工</option>
-                                            <option value="人事">人事</option>
-                                        </select>
-
-                      </li>
+                    <input name="部門" class="Regular shadow" value="${data.部門}" />
+                </li>
                 <li class="mt-3">
-                                        <label>權限：</label>
-                                        <select name="權限" class="Regular shadow">
-                                            <option hidden>${data.權限}</option>
-                                            <option value="主管">主管</option>
-                                            <option value="員工">員工</option>
-                                            <option value="人事">人事</option>
-                                        </select>
-                   </li>
-                     <li class="mt-4">
-                                   年資：<input name="年資" class="Regular shadow" value="${data.年資}"/>
-                 </li>
-                   <li class="mt-4">
-                                    特休：<input name="特休" class="Regular shadow" value="${data.特休}"/>
-                   </li>
-                    <li class="mt-4">
-                                    薪資：<input name="薪資" class="Regular shadow" value="${data.薪資}"/>
-                    </li>
-                                   </ul>
-                                    </div>`
+                    <select name="職稱" class="Regular shadow">
+                        <option hidden>${data.職稱}</option>
+                        <option value="主管">主管</option>
+                        <option value="員工">員工</option>
+                        <option value="人事">人事</option>
+                    </select>
+                </li>
+                <li class="mt-4">
+                    <input name="特休" class="Regular shadow" value="${data.特休}" />
+                </li>
+                <li class="mt-4">
+                    <input name="薪資" class="Regular shadow" value="${data.薪資}" />
+                </li>
+                </li>
+                <li class="mt-4">
+                    <input name="居住地" class="txtlive Regular shadow" value="${data.居住地}" />
+                </li>
+            </ul>
+        </div>
+    </div>
 
-                    );
+
+
+
+
+
+                    `);
                 }
             });
         };
@@ -636,9 +667,7 @@
                             "居住地": $(".addlive").val(),
                             "受雇日期": $(".addhire").val(),
                             "部門": $(".addpart").val(),
-                            "職稱": $(".addjob").val(),
-                            "權限": $(".addpower").val(),
-                            "年資": $(".addyearpay").val(),
+                            "職稱": $(".addjob").val(),                                      
                             "特休": $(".addspvaction").val(),
                             "薪資": $(".addpayment").val(),
                             "狀態": $(".addstatus").val()
