@@ -21,6 +21,7 @@
     <Property Name="pjReviewAdvise3" Type="nvarchar" MaxLength="50" />
     <Property Name="pj廠商投標金額" Type="money" />
     <Property Name="pj項目" Type="nvarchar" MaxLength="50" />
+    <Property Name="pjDailyReport" Type="int" />
   </EntityType>
   <EntityType Name="MeetingRoom">
     <Key>
@@ -142,27 +143,15 @@
     <Property Name="中文姓名" Type="nvarchar" MaxLength="50" />
     <Property Name="職稱" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <Association Name="FK_projectTeam_eipProjectDetail">
-    <End Role="eipProjectDetail" Type="Self.eipProjectDetail" Multiplicity="0..1" />
-    <End Role="projectTeam" Type="Self.projectTeam" Multiplicity="*" />
+  <Association Name="FK_eipProjectDetail_projectTeam">
+    <End Role="projectTeam" Type="Self.projectTeam" Multiplicity="0..1" />
+    <End Role="eipProjectDetail" Type="Self.eipProjectDetail" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="eipProjectDetail">
-        <PropertyRef Name="pjId" />
+      <Principal Role="projectTeam">
+        <PropertyRef Name="pjDailyReport" />
       </Principal>
-      <Dependent Role="projectTeam">
-        <PropertyRef Name="pjId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_projectTeam_個人資料">
-    <End Role="個人資料" Type="Self.個人資料" Multiplicity="0..1" />
-    <End Role="projectTeam" Type="Self.projectTeam" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="個人資料">
-        <PropertyRef Name="EmployeeID" />
-      </Principal>
-      <Dependent Role="projectTeam">
-        <PropertyRef Name="employeeID" />
+      <Dependent Role="eipProjectDetail">
+        <PropertyRef Name="pjDailyReport" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -189,13 +178,9 @@
     <EntitySet Name="個人資料" EntityType="Self.個人資料" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="假別" EntityType="Self.假別" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="請假細項" EntityType="Self.請假細項" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_projectTeam_eipProjectDetail" Association="Self.FK_projectTeam_eipProjectDetail">
+    <AssociationSet Name="FK_eipProjectDetail_projectTeam" Association="Self.FK_eipProjectDetail_projectTeam">
+      <End Role="projectTeam" EntitySet="projectTeam" />
       <End Role="eipProjectDetail" EntitySet="eipProjectDetail" />
-      <End Role="projectTeam" EntitySet="projectTeam" />
-    </AssociationSet>
-    <AssociationSet Name="FK_projectTeam_個人資料" Association="Self.FK_projectTeam_個人資料">
-      <End Role="個人資料" EntitySet="個人資料" />
-      <End Role="projectTeam" EntitySet="projectTeam" />
     </AssociationSet>
     <AssociationSet Name="FK_請假細項_假別" Association="Self.FK_請假細項_假別">
       <End Role="假別" EntitySet="假別" />

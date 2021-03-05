@@ -160,12 +160,12 @@
                     </div>
             </ul>
             <span class="navbar-text"> <i class="far fa-bell fa-2x mr-4"></i></span>
-            <span class="navbar-text"> <i class="fa fa-user fa-1x pointer NameClick" title="個人詳細資訊" data-toggle="modal" data-target="#UserProfile"></i></span>
+            <span class="navbar-text"> <i class="fa fa-user fa-1x pointer NameClick" title="個人詳細資訊"></i></span>
             @* 測試 *@
             <span class="navbar-text"> <a class="nav-link CookieAuth"> </a></span>
             <span class="navbar-text"> <a class="nav-link mr-3 CookieName"></a></span>
             <span class="navbar-text">
-            <a class="pb-1 Logout"data-toggle="tooltip" data-placement="bottom" title="點擊登出系統！" href="@Url.Action("LogOut","Home")"> <i class="fas fa-sign-out-alt"></i></a>
+                <a class="pb-1 Logout" data-toggle="tooltip" data-placement="bottom" title="點擊登出系統！" href="@Url.Action("LogOut","Home")"> <i class="fas fa-sign-out-alt"></i></a>
             </span>
         </div>
     </nav>
@@ -176,88 +176,161 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title FormTextShadow" id="exampleModalLabel">員工資訊</h5>
-                        <button type="button" class="close" data-dismiss="modal">    
+                        <button type="button" class="close" data-dismiss="modal">
                         </button>
                     </div>
                     <div class="modal-body modalbody">
                         <form class="addprofile FormTextShadow"></form>
 
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary ClearModal" data-dismiss="modal">Close</button>
+                    <div class="modal-footer d-flex justify-content-between">
+                        <div>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Editpw">修改密碼</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary ClearModal closeprofile" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        @*修改密碼*@
+        <div class="modal fade" id="Editpw" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title FormTextShadow" id="exampleModalLabel">員工資訊</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                        </button>
+                    </div>
+                    <div class="modal-body modalbody">
+                        <div class="d-flex my-4">
+                            <div>
+                                <label class="FormTextShadow">輸入欲修改密碼：</label>
+                            </div>
+                            <div>
+                                <input type="password" class="FormTextShadow editpw1 ml-5" />
+                            </div>
+                        </div>
+                        <div class="d-flex mb-4">
+                            <div>
+                                <label class="FormTextShadow mr-2">重複輸入欲修改密碼：</label>
+                            </div>
+                            <div>
+                                <input type="password" class="FormTextShadow editpw2 ml-2" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button type="button" class="btn btn-primary editpwsave">確認修改</button>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-secondary ClearModal" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 應用程式</p>
-        </footer>
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 應用程式</p>
+            </footer>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("script", required: false)
-<script>
+    <script>
 
-    if (document.cookie != '') {
-        $('.CookieAuth').html(decodeURI(document.cookie.split('Auth=')[1].split('&')[0]));
-        $('.CookieName').html(decodeURI(document.cookie.split('Name=')[1].split('&')[0]));
-    } else {
-        window.location.href = "/Home/Login";
-    }
+        if (document.cookie != '') {
+            $('.CookieAuth').html(decodeURI(document.cookie.split('Auth=')[1].split('&')[0]));
+            $('.CookieName').html(decodeURI(document.cookie.split('Name=')[1].split('&')[0]));
+        } else {
+            window.location.href = "/Home/Login";
+        }
 
         $(".NameClick").click(function () {
-        $.ajax({
-            url: "/Home/MyProfile",
-            method: "Get",
-            success: function (data) {
-                $(".addprofile").html(`
-<div class="d-flex justify-content-center">
-<div class="mr-1">
-<p class="">中文姓名：${data.中文姓名}</p>
-<p class="">英文姓名：${data.英文姓名}</p>
-                                <label>性別：</label>
-                            <select disabled >
-                            <option value="性別" selected >${data.性別}</option>
-                        </select>
+            $("#UserProfile").modal('show');
+            $.ajax({
+                url: "/Home/MyProfile",
+                method: "Get",
+                success: function (data) {
+                    $(".addprofile").html(`
+                                                <div class="d-flex justify-content-center">
+                                                <div class="mr-1">
+                                                <p class="">中文姓名：${data.中文姓名}</p>
+                                                <p class="">英文姓名：${data.英文姓名}</p>
+                                                <label>性別：</label>
+                                            <select disabled >
+                                            <option value="性別" selected >${data.性別}</option>
+                                            </select>
+                                                <p class="">出生年月日：${data.出生年月日}</p>
+                                                <p class="">婚姻狀況：${data.婚姻狀況}</p>
+                                                <p class="">居住地：${data.居住地}</p>
+                                                </div>
+                                                <div class="ml-1">
+                                                <p class="">電話：${data.電話}</p>
+                                                <p class="">受雇日期：${data.受雇日期}</p>
+                                                <p class="">部門：${data.部門}</p>
+                                                <p class="">職稱：${data.職稱}</p>
+                                                <p class="">特休：${data.特休}</p>
+                                                <p class="">薪資：${data.薪資}</p>
+                                                </div></div>`);
+                }
+            });
 
 
-<p class="">出生年月日：${data.出生年月日}</p>
-<p class="">婚姻狀況：${data.婚姻狀況}</p>
-<p class="">居住地：${data.居住地}</p>
-</div>
-<div class="ml-1">
-<p class="">電話：${data.電話}</p>
-<p class="">受雇日期：${data.受雇日期}</p>
-<p class="">部門：${data.部門}</p>
-<p class="">職稱：${data.職稱}</p>
-<p class="">特休：${data.特休}</p>
-<p class="">薪資：${data.薪資}</p>
-</div></div>`);
-            }
         });
-        });
 
 
-           @*if ( @Request.Cookies["AutoLg"]== null) {
-        window.location.href = '/Home/Login'
-    }*@
-
-
-    if (decodeURI(document.cookie.split('Auth=')[1].split('&')[0]) != '主管') {
+        if (decodeURI(document.cookie.split('Auth=')[1].split('&')[0]) != '主管') {
             $(".boss").attr('hidden', true);
         }
-         if (decodeURI(document.cookie.split('Auth=')[1].split('&')[0]) != '人事') {
-             $(".hr").attr('hidden', true);
-    }
+        if (decodeURI(document.cookie.split('Auth=')[1].split('&')[0]) != '人事') {
+            $(".hr").attr('hidden', true);
+        }
 
 
-    @*if ('@Server.UrlDecode(Request.Cookies["AutoLg"]["Auth"])' == '主管') {
-        $(".hr").attr('hidden', false); $(".boss").attr('hidden', false);
-    }*@
 
-</script>
+        $("#Editpw").click(function () {
+            $("#UserProfile").modal('show');
+            $(".editpw1").val('');
+            $(".editpw2").val('');
+        });
+
+        $(".editpwsave").click(function () {
+            var newpwd = $(".editpw2").val();
+            var reg = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!#$%^&*()_+`\-={}\[\]:";'<>?,.\/]).{4,16}$/;
+            var flag = reg.test(newpwd);  
+            if ($(".editpw1").val() != $(".editpw2").val()) {
+                $(".editpw1").val('');
+                $(".editpw2").val('');
+                swal("驗證失敗", "密碼驗證輸入不相符...", "error");
+            }
+            else if ($(".editpw1").val() == '' || $(".editpw2").val() == '') {
+                $(".editpw1").val('');
+                $(".editpw2").val('');
+                swal("驗證失敗", "欄位不可為空", "error");
+            } else if (flag == false) {
+                $(".editpw1").val('');
+                $(".editpw2").val('');
+                swal("驗證失敗", "新密碼必須由 4-16位字母、數字、特殊符號線組成...", "error");
+                return false;
+            }else {
+                $.ajax({
+                    url: "/Home/EditPW",
+                    data: { 'pw': $(".editpw2").val()},
+                    method: "Get",
+                    success: function () {
+                        swal("成功", "修改密碼成功...", "success");
+                        $("#UserProfile").modal('hide');
+                        $("#Editpw").modal('hide');
+                    }
+                })
+            }
+        });
+    </script>
 </body>
 </html>

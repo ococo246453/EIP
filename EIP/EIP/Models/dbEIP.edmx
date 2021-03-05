@@ -26,6 +26,7 @@
           <Property Name="pjReviewAdvise3" Type="nvarchar" MaxLength="50" />
           <Property Name="pj廠商投標金額" Type="money" />
           <Property Name="pj項目" Type="nvarchar" MaxLength="50" />
+          <Property Name="pjDailyReport" Type="int" />
         </EntityType>
         <EntityType Name="MeetingRoom">
           <Key>
@@ -147,27 +148,15 @@
           <Property Name="中文姓名" Type="nvarchar" MaxLength="50" />
           <Property Name="職稱" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_projectTeam_eipProjectDetail">
-          <End Role="eipProjectDetail" Type="Self.eipProjectDetail" Multiplicity="0..1" />
-          <End Role="projectTeam" Type="Self.projectTeam" Multiplicity="*" />
+        <Association Name="FK_eipProjectDetail_projectTeam">
+          <End Role="projectTeam" Type="Self.projectTeam" Multiplicity="0..1" />
+          <End Role="eipProjectDetail" Type="Self.eipProjectDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="eipProjectDetail">
-              <PropertyRef Name="pjId" />
+            <Principal Role="projectTeam">
+              <PropertyRef Name="pjDailyReport" />
             </Principal>
-            <Dependent Role="projectTeam">
-              <PropertyRef Name="pjId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_projectTeam_個人資料">
-          <End Role="個人資料" Type="Self.個人資料" Multiplicity="0..1" />
-          <End Role="projectTeam" Type="Self.projectTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="個人資料">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="projectTeam">
-              <PropertyRef Name="employeeID" />
+            <Dependent Role="eipProjectDetail">
+              <PropertyRef Name="pjDailyReport" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -194,13 +183,9 @@
           <EntitySet Name="個人資料" EntityType="Self.個人資料" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="假別" EntityType="Self.假別" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="請假細項" EntityType="Self.請假細項" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_projectTeam_eipProjectDetail" Association="Self.FK_projectTeam_eipProjectDetail">
+          <AssociationSet Name="FK_eipProjectDetail_projectTeam" Association="Self.FK_eipProjectDetail_projectTeam">
+            <End Role="projectTeam" EntitySet="projectTeam" />
             <End Role="eipProjectDetail" EntitySet="eipProjectDetail" />
-            <End Role="projectTeam" EntitySet="projectTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_projectTeam_個人資料" Association="Self.FK_projectTeam_個人資料">
-            <End Role="個人資料" EntitySet="個人資料" />
-            <End Role="projectTeam" EntitySet="projectTeam" />
           </AssociationSet>
           <AssociationSet Name="FK_請假細項_假別" Association="Self.FK_請假細項_假別">
             <End Role="假別" EntitySet="假別" />
@@ -222,13 +207,9 @@
           <EntitySet Name="個人資料" EntityType="dbEIPModel.個人資料" />
           <EntitySet Name="假別" EntityType="dbEIPModel.假別" />
           <EntitySet Name="請假細項" EntityType="dbEIPModel.請假細項" />
-          <AssociationSet Name="FK_projectTeam_eipProjectDetail" Association="dbEIPModel.FK_projectTeam_eipProjectDetail">
+          <AssociationSet Name="FK_eipProjectDetail_projectTeam" Association="dbEIPModel.FK_eipProjectDetail_projectTeam">
+            <End Role="projectTeam" EntitySet="projectTeam" />
             <End Role="eipProjectDetail" EntitySet="eipProjectDetail" />
-            <End Role="projectTeam" EntitySet="projectTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_projectTeam_個人資料" Association="dbEIPModel.FK_projectTeam_個人資料">
-            <End Role="個人資料" EntitySet="個人資料" />
-            <End Role="projectTeam" EntitySet="projectTeam" />
           </AssociationSet>
           <AssociationSet Name="FK_請假細項_假別" Association="dbEIPModel.FK_請假細項_假別">
             <End Role="假別" EntitySet="假別" />
@@ -256,7 +237,8 @@
           <Property Name="pjReviewAdvise3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="pj廠商投標金額" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="pj項目" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="projectTeam" Relationship="dbEIPModel.FK_projectTeam_eipProjectDetail" FromRole="eipProjectDetail" ToRole="projectTeam" />
+          <Property Name="pjDailyReport" Type="Int32" />
+          <NavigationProperty Name="projectTeam" Relationship="dbEIPModel.FK_eipProjectDetail_projectTeam" FromRole="eipProjectDetail" ToRole="projectTeam" />
         </EntityType>
         <EntityType Name="MeetingRoom">
           <Key>
@@ -298,8 +280,7 @@
           <Property Name="pj工作內容" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="pj工作時間" Type="Int32" />
           <Property Name="pj填表日期" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="eipProjectDetail" Relationship="dbEIPModel.FK_projectTeam_eipProjectDetail" FromRole="projectTeam" ToRole="eipProjectDetail" />
-          <NavigationProperty Name="個人資料" Relationship="dbEIPModel.FK_projectTeam_個人資料" FromRole="projectTeam" ToRole="個人資料" />
+          <NavigationProperty Name="eipProjectDetail" Relationship="dbEIPModel.FK_eipProjectDetail_projectTeam" FromRole="projectTeam" ToRole="eipProjectDetail" />
         </EntityType>
         <EntityType Name="行事曆">
           <Key>
@@ -353,7 +334,6 @@
           <Property Name="薪資" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="特休" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="權限" Type="Int32" />
-          <NavigationProperty Name="projectTeam" Relationship="dbEIPModel.FK_projectTeam_個人資料" FromRole="個人資料" ToRole="projectTeam" />
         </EntityType>
         <EntityType Name="假別">
           <Key>
@@ -383,27 +363,15 @@
           <Property Name="職稱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="假別" Relationship="dbEIPModel.FK_請假細項_假別" FromRole="請假細項" ToRole="假別" />
         </EntityType>
-        <Association Name="FK_projectTeam_eipProjectDetail">
-          <End Type="dbEIPModel.eipProjectDetail" Role="eipProjectDetail" Multiplicity="0..1" />
-          <End Type="dbEIPModel.projectTeam" Role="projectTeam" Multiplicity="*" />
+        <Association Name="FK_eipProjectDetail_projectTeam">
+          <End Type="dbEIPModel.projectTeam" Role="projectTeam" Multiplicity="0..1" />
+          <End Type="dbEIPModel.eipProjectDetail" Role="eipProjectDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="eipProjectDetail">
-              <PropertyRef Name="pjId" />
+            <Principal Role="projectTeam">
+              <PropertyRef Name="pjDailyReport" />
             </Principal>
-            <Dependent Role="projectTeam">
-              <PropertyRef Name="pjId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_projectTeam_個人資料">
-          <End Type="dbEIPModel.個人資料" Role="個人資料" Multiplicity="0..1" />
-          <End Type="dbEIPModel.projectTeam" Role="projectTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="個人資料">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="projectTeam">
-              <PropertyRef Name="employeeID" />
+            <Dependent Role="eipProjectDetail">
+              <PropertyRef Name="pjDailyReport" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -428,6 +396,7 @@
           <EntitySetMapping Name="eipProjectDetail">
             <EntityTypeMapping TypeName="dbEIPModel.eipProjectDetail">
               <MappingFragment StoreEntitySet="eipProjectDetail">
+                <ScalarProperty Name="pjDailyReport" ColumnName="pjDailyReport" />
                 <ScalarProperty Name="pj項目" ColumnName="pj項目" />
                 <ScalarProperty Name="pj廠商投標金額" ColumnName="pj廠商投標金額" />
                 <ScalarProperty Name="pjReviewAdvise3" ColumnName="pjReviewAdvise3" />

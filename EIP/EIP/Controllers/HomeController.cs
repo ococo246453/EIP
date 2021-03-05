@@ -96,6 +96,13 @@ namespace EIP.Controllers
             };
             return Json(mvm, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult EditPW(string pw)
+        {
+            int ID = Convert.ToInt32(Request.Cookies["AutoLg"]["id"]);
+            db.個人資料.FirstOrDefault(x => x.EmployeeID == ID).EmployeePW = pw;    
+            db.SaveChanges();
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult HRShow()
         {

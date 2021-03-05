@@ -625,8 +625,7 @@
         $(".AddEMP").click(function () {
             var newpwd = $(".addpw").val();
             var reg = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!#$%^&*()_+`\-={}\[\]:";'<>?,.\/]).{4,16}$/;
-            var flag = reg.test(newpwd);
-            ;
+            var flag = reg.test(newpwd);        
             $(".addlive").val(`${$(".zipcode").val() + '   ' + $(".county").val() + $(".district").val() + $(".live").val()}`);
             if ($(".addemail").val() == '' ||
                 $(".addpw").val() == '' ||

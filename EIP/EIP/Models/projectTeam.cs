@@ -14,6 +14,12 @@ namespace EIP.Models
     
     public partial class projectTeam
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public projectTeam()
+        {
+            this.eipProjectDetail = new HashSet<eipProjectDetail>();
+        }
+    
         public int pjDailyReport { get; set; }
         public string pjTeam { get; set; }
         public Nullable<int> pjId { get; set; }
@@ -26,7 +32,7 @@ namespace EIP.Models
         public Nullable<int> pj工作時間 { get; set; }
         public string pj填表日期 { get; set; }
     
-        public virtual eipProjectDetail eipProjectDetail { get; set; }
-        public virtual 個人資料 個人資料 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<eipProjectDetail> eipProjectDetail { get; set; }
     }
 }
