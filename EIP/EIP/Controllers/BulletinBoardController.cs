@@ -98,6 +98,7 @@ namespace EIP.Controllers
             return Json(bb, JsonRequestBehavior.AllowGet);
         }
 
+
         // 刪除佈告欄
 
         [HttpGet]
@@ -117,14 +118,12 @@ namespace EIP.Controllers
                      select b;
             if (!String.IsNullOrEmpty(name))
             {
-                bb = bb.Where(a => a.中文姓名.Contains(name));
+                bb = bb.Where(a => a.中文姓名.Contains(name)||a.佈告欄標題.Contains(name)||a.發布日期.ToString().Contains(name));
             }
-
-            //佈告欄 bb = db.佈告欄.FirstOrDefault(m => m.中文姓名.Contains(name));
-            return Json(bb, JsonRequestBehavior.AllowGet);
+            return Json(bb.ToList().Take(10), JsonRequestBehavior.AllowGet);
         }
 
-
+        // 佈告欄分頁方法
         public JsonResult BBPage(int arrow)
         {
 
@@ -141,6 +140,69 @@ namespace EIP.Controllers
                       };
             var bbvm = bb.Skip((arrow - 1) * 10).Take(10);
             return Json(bbvm, JsonRequestBehavior.AllowGet);
+        }
+
+
+        // ---------------------------以下Fullcalendar方法----------------------------//
+
+
+        // 
+        public JsonResult GetEvents()
+        {
+            using (dbEIPEntities db = new dbEIPEntities())
+            {
+                var events = db.行事曆.ToList();
+                return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+        }
+
+        [HttpPost]
+        public JsonResult SaveEvent(行事曆 e)
+        {
+            var status = false;
+            using (dbEIPEntities db = new dbEIPEntities())
+            {
+                if (e.EventID > 0)
+                {
+                    //Update the event
+                    var v = db.行事曆.Where(a => a.EventID == e.EventID).FirstOrDefault();
+                    if (v != null)
+                    {
+                        v.Subject = e.Subject;
+                        v.Start = e.Start;
+                        v.End = e.End;
+                        v.Description = e.Description;
+                        v.IsFullDay = e.IsFullDay;
+                        v.ThemeColor = e.ThemeColor;
+                    }
+                }
+                else
+                {
+                    db.行事曆.Add(e);
+                }
+
+                db.SaveChanges();
+                status = true;
+
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
+
+        [HttpPost]
+        public JsonResult DeleteEvent(int eventID)
+        {
+            var status = false;
+            using (dbEIPEntities db = new dbEIPEntities())
+            {
+                var v = db.行事曆.Where(a => a.EventID == eventID).FirstOrDefault();
+                if (v != null)
+                {
+                    db.行事曆.Remove(v);
+                    db.SaveChanges();
+                    status = true;
+                }
+            }
+            return new JsonResult { Data = new { status = status } };
         }
     }
 }

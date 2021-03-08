@@ -5,17 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="38b217bd847d44beae00f30cb35e52b9" Name="Diagram1">
-        <EntityTypeShape EntityType="dbEIPModel.eipProjectDetail" Width="1.5" PointX="8" PointY="1" />
-        <EntityTypeShape EntityType="dbEIPModel.MeetingRoom" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="dbEIPModel.MeetingRoomBooking" Width="1.5" PointX="2.75" PointY="5.75" />
-        <EntityTypeShape EntityType="dbEIPModel.projectTeam" Width="1.5" PointX="5.75" PointY="1.75" />
-        <EntityTypeShape EntityType="dbEIPModel.行事曆" Width="1.5" PointX="4.75" PointY="5.75" />
-        <EntityTypeShape EntityType="dbEIPModel.佈告欄" Width="1.5" PointX="6.75" PointY="6.75" />
-        <EntityTypeShape EntityType="dbEIPModel.表單類別" Width="1.5" PointX="8.75" PointY="6.75" />
-        <EntityTypeShape EntityType="dbEIPModel.個人資料" Width="1.5" PointX="0.75" PointY="9.75" />
-        <EntityTypeShape EntityType="dbEIPModel.假別" Width="1.5" PointX="0.75" PointY="2.125" />
-        <EntityTypeShape EntityType="dbEIPModel.請假細項" Width="1.5" PointX="3" PointY="1" />
-        <AssociationConnector Association="dbEIPModel.FK_eipProjectDetail_projectTeam" />
+        <EntityTypeShape EntityType="dbEIPModel.eipProjectDetail" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="dbEIPModel.MeetingRoom" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="dbEIPModel.MeetingRoomBooking" Width="1.5" PointX="4.75" PointY="5.75" />
+        <EntityTypeShape EntityType="dbEIPModel.projectTeam" Width="1.5" PointX="3" PointY="1.5" />
+        <EntityTypeShape EntityType="dbEIPModel.行事曆" Width="1.5" PointX="6.75" PointY="5.75" />
+        <EntityTypeShape EntityType="dbEIPModel.佈告欄" Width="1.5" PointX="8.75" PointY="5.75" />
+        <EntityTypeShape EntityType="dbEIPModel.表單類別" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="dbEIPModel.個人資料" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="dbEIPModel.假別" Width="1.5" PointX="5.75" PointY="2.125" />
+        <EntityTypeShape EntityType="dbEIPModel.請假細項" Width="1.5" PointX="8" PointY="1" />
+        <AssociationConnector Association="dbEIPModel.FK_projectTeam_eipProjectDetail" />
+        <AssociationConnector Association="dbEIPModel.FK_projectTeam_個人資料" />
         <AssociationConnector Association="dbEIPModel.FK_請假細項_假別" />
       </Diagram>
     </edmx:Diagrams>

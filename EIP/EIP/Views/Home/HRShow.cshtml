@@ -287,6 +287,7 @@
                                             </li>`);
             }
         })
+        
 
 
 
@@ -309,9 +310,6 @@
             //    $(".firstbtn").attr('value', page--);
             //}
             $(".firstbtn").off('click');
-        })
-        $(".arrowborn").on('click', '.sectbtn', function () {
-
             if (page_num == SliceTotal) {
                 $(".sectbtn").attr('value', currentpage = page_num - 1);
             } else {
@@ -795,9 +793,12 @@
 
         //------跳頁刷新起始----//
         $(".pagesearch").blur(function () {
+            if ($(".pagesearch").val() < SliceTotal) {
+                swal("頁面跳轉失敗", "輸入頁數不可小於 1", "error");
+            }
             if ($(".pagesearch").val() > SliceTotal) {
                 $(".pagesearch").val('');
-                swal("頁面跳轉失敗", "輸入頁數大於最大頁數", "error")
+                swal("頁面跳轉失敗", "輸入頁數大於最大頁數", "error");
             } else if ($(".pagesearch").val() == 0) {
                 $(".pagesearch").val('');
                 swal("頁面跳轉失敗", "輸入頁數不可為空 ", "error");

@@ -4,7 +4,6 @@
     <EntitySetMapping Name="eipProjectDetail">
       <EntityTypeMapping TypeName="dbEIPModel.eipProjectDetail">
         <MappingFragment StoreEntitySet="eipProjectDetail">
-          <ScalarProperty Name="pjDailyReport" ColumnName="pjDailyReport" />
           <ScalarProperty Name="pj項目" ColumnName="pj項目" />
           <ScalarProperty Name="pj廠商投標金額" ColumnName="pj廠商投標金額" />
           <ScalarProperty Name="pjReviewAdvise3" ColumnName="pjReviewAdvise3" />

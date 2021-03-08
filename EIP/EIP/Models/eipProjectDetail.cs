@@ -14,6 +14,12 @@ namespace EIP.Models
     
     public partial class eipProjectDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public eipProjectDetail()
+        {
+            this.projectTeam = new HashSet<projectTeam>();
+        }
+    
         public int pjId { get; set; }
         public string pjName { get; set; }
         public string pjManager { get; set; }
@@ -31,8 +37,8 @@ namespace EIP.Models
         public string pjReviewAdvise3 { get; set; }
         public Nullable<decimal> pj廠商投標金額 { get; set; }
         public string pj項目 { get; set; }
-        public Nullable<int> pjDailyReport { get; set; }
     
-        public virtual projectTeam projectTeam { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<projectTeam> projectTeam { get; set; }
     }
 }
