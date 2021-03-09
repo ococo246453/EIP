@@ -5,6 +5,8 @@
     <EntitySet Name="MeetingRoom" EntityType="dbEIPModel.MeetingRoom" />
     <EntitySet Name="MeetingRoomBooking" EntityType="dbEIPModel.MeetingRoomBooking" />
     <EntitySet Name="projectTeam" EntityType="dbEIPModel.projectTeam" />
+    <EntitySet Name="加班別" EntityType="dbEIPModel.加班別" />
+    <EntitySet Name="加班細項" EntityType="dbEIPModel.加班細項" />
     <EntitySet Name="行事曆" EntityType="dbEIPModel.行事曆" />
     <EntitySet Name="佈告欄" EntityType="dbEIPModel.佈告欄" />
     <EntitySet Name="表單類別" EntityType="dbEIPModel.表單類別" />
@@ -18,6 +20,10 @@
     <AssociationSet Name="FK_projectTeam_個人資料" Association="dbEIPModel.FK_projectTeam_個人資料">
       <End Role="個人資料" EntitySet="個人資料" />
       <End Role="projectTeam" EntitySet="projectTeam" />
+    </AssociationSet>
+    <AssociationSet Name="FK_加班細項_加班別" Association="dbEIPModel.FK_加班細項_加班別">
+      <End Role="加班別" EntitySet="加班別" />
+      <End Role="加班細項" EntitySet="加班細項" />
     </AssociationSet>
     <AssociationSet Name="FK_請假細項_假別" Association="dbEIPModel.FK_請假細項_假別">
       <End Role="假別" EntitySet="假別" />
@@ -90,6 +96,31 @@
     <NavigationProperty Name="eipProjectDetail" Relationship="dbEIPModel.FK_projectTeam_eipProjectDetail" FromRole="projectTeam" ToRole="eipProjectDetail" />
     <NavigationProperty Name="個人資料" Relationship="dbEIPModel.FK_projectTeam_個人資料" FromRole="projectTeam" ToRole="個人資料" />
   </EntityType>
+  <EntityType Name="加班別">
+    <Key>
+      <PropertyRef Name="加班ID" />
+    </Key>
+    <Property Name="加班ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="加班類別" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="加班細項" Relationship="dbEIPModel.FK_加班細項_加班別" FromRole="加班別" ToRole="加班細項" />
+  </EntityType>
+  <EntityType Name="加班細項">
+    <Key>
+      <PropertyRef Name="加班表編號" />
+    </Key>
+    <Property Name="加班表編號" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="中文姓名" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="部門" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="加班ID" Type="Int32" />
+    <Property Name="已用可用" Type="Int32" />
+    <Property Name="開始日期" Type="DateTime" Precision="3" />
+    <Property Name="結束日期" Type="DateTime" Precision="3" />
+    <Property Name="加班時數" Type="Int32" />
+    <Property Name="事由說明" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="主管簽核" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="加班別" Relationship="dbEIPModel.FK_加班細項_加班別" FromRole="加班細項" ToRole="加班別" />
+  </EntityType>
   <EntityType Name="行事曆">
     <Key>
       <PropertyRef Name="EventID" />
@@ -138,10 +169,11 @@
     <Property Name="信箱" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="電話" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="居住地" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="婚姻狀況" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="婚姻狀況" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="年資" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="薪資" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="特休" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="權限" Type="Int32" />
+    <Property Name="權限" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="projectTeam" Relationship="dbEIPModel.FK_projectTeam_個人資料" FromRole="個人資料" ToRole="projectTeam" />
   </EntityType>
   <EntityType Name="假別">
@@ -193,6 +225,18 @@
       </Principal>
       <Dependent Role="projectTeam">
         <PropertyRef Name="employeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_加班細項_加班別">
+    <End Type="dbEIPModel.加班別" Role="加班別" Multiplicity="0..1" />
+    <End Type="dbEIPModel.加班細項" Role="加班細項" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="加班別">
+        <PropertyRef Name="加班ID" />
+      </Principal>
+      <Dependent Role="加班細項">
+        <PropertyRef Name="加班ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

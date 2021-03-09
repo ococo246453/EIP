@@ -183,6 +183,12 @@
     <Compile Include="Models\假別.cs">
       <DependentUpon>dbEIP.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\加班別.cs">
+      <DependentUpon>dbEIP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\加班細項.cs">
+      <DependentUpon>dbEIP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\行事曆.cs">
       <DependentUpon>dbEIP.tt</DependentUpon>
     </Compile>
@@ -336,85 +342,6 @@
     <Content Include="images\ui-icons_f7a50d_256x240.png" />
     <Content Include="images\ui-icons_fcd113_256x240.png" />
     <Content Include="images\ui-icons_ffffff_256x240.png" />
-    <Content Include="lib\locales-all.js" />
-    <Content Include="lib\locales-all.min.js" />
-    <Content Include="lib\locales\af.js" />
-    <Content Include="lib\locales\ar-dz.js" />
-    <Content Include="lib\locales\ar-kw.js" />
-    <Content Include="lib\locales\ar-ly.js" />
-    <Content Include="lib\locales\ar-ma.js" />
-    <Content Include="lib\locales\ar-sa.js" />
-    <Content Include="lib\locales\ar-tn.js" />
-    <Content Include="lib\locales\ar.js" />
-    <Content Include="lib\locales\az.js" />
-    <Content Include="lib\locales\bg.js" />
-    <Content Include="lib\locales\bs.js" />
-    <Content Include="lib\locales\ca.js" />
-    <Content Include="lib\locales\cs.js" />
-    <Content Include="lib\locales\cy.js" />
-    <Content Include="lib\locales\da.js" />
-    <Content Include="lib\locales\de-at.js" />
-    <Content Include="lib\locales\de.js" />
-    <Content Include="lib\locales\el.js" />
-    <Content Include="lib\locales\en-au.js" />
-    <Content Include="lib\locales\en-gb.js" />
-    <Content Include="lib\locales\en-nz.js" />
-    <Content Include="lib\locales\eo.js" />
-    <Content Include="lib\locales\es-us.js" />
-    <Content Include="lib\locales\es.js" />
-    <Content Include="lib\locales\et.js" />
-    <Content Include="lib\locales\eu.js" />
-    <Content Include="lib\locales\fa.js" />
-    <Content Include="lib\locales\fi.js" />
-    <Content Include="lib\locales\fr-ca.js" />
-    <Content Include="lib\locales\fr-ch.js" />
-    <Content Include="lib\locales\fr.js" />
-    <Content Include="lib\locales\gl.js" />
-    <Content Include="lib\locales\he.js" />
-    <Content Include="lib\locales\hi.js" />
-    <Content Include="lib\locales\hr.js" />
-    <Content Include="lib\locales\hu.js" />
-    <Content Include="lib\locales\hy-am.js" />
-    <Content Include="lib\locales\id.js" />
-    <Content Include="lib\locales\is.js" />
-    <Content Include="lib\locales\it.js" />
-    <Content Include="lib\locales\ja.js" />
-    <Content Include="lib\locales\ka.js" />
-    <Content Include="lib\locales\kk.js" />
-    <Content Include="lib\locales\ko.js" />
-    <Content Include="lib\locales\lb.js" />
-    <Content Include="lib\locales\lt.js" />
-    <Content Include="lib\locales\lv.js" />
-    <Content Include="lib\locales\mk.js" />
-    <Content Include="lib\locales\ms.js" />
-    <Content Include="lib\locales\nb.js" />
-    <Content Include="lib\locales\ne.js" />
-    <Content Include="lib\locales\nl.js" />
-    <Content Include="lib\locales\nn.js" />
-    <Content Include="lib\locales\pl.js" />
-    <Content Include="lib\locales\pt-br.js" />
-    <Content Include="lib\locales\pt.js" />
-    <Content Include="lib\locales\ro.js" />
-    <Content Include="lib\locales\ru.js" />
-    <Content Include="lib\locales\sk.js" />
-    <Content Include="lib\locales\sl.js" />
-    <Content Include="lib\locales\sq.js" />
-    <Content Include="lib\locales\sr-cyrl.js" />
-    <Content Include="lib\locales\sr.js" />
-    <Content Include="lib\locales\sv.js" />
-    <Content Include="lib\locales\ta-in.js" />
-    <Content Include="lib\locales\th.js" />
-    <Content Include="lib\locales\tr.js" />
-    <Content Include="lib\locales\ug.js" />
-    <Content Include="lib\locales\uk.js" />
-    <Content Include="lib\locales\uz.js" />
-    <Content Include="lib\locales\vi.js" />
-    <Content Include="lib\locales\zh-cn.js" />
-    <Content Include="lib\locales\zh-tw.js" />
-    <Content Include="lib\main.css" />
-    <Content Include="lib\main.js" />
-    <Content Include="lib\main.min.css" />
-    <Content Include="lib\main.min.js" />
     <Content Include="Models\dbEIP.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>dbEIP.Context.cs</LastGenOutput>
@@ -602,6 +529,8 @@
     <Content Include="Views\DDDDD\UpdateData.cshtml" />
     <Content Include="Views\DDDDD\出缺勤系統.cshtml" />
     <Content Include="Views\MeetingRoom\MeetingRoomBookingSearch.cshtml" />
+    <Content Include="Views\DDDDD\OverTime.cshtml" />
+    <Content Include="Views\DDDDD\OverTimeList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

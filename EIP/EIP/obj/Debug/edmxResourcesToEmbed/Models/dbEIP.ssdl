@@ -63,6 +63,29 @@
     <Property Name="pj工作時間" Type="int" />
     <Property Name="pj填表日期" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="加班別">
+    <Key>
+      <PropertyRef Name="加班ID" />
+    </Key>
+    <Property Name="加班ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="加班類別" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="加班細項">
+    <Key>
+      <PropertyRef Name="加班表編號" />
+    </Key>
+    <Property Name="加班表編號" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="中文姓名" Type="nvarchar" MaxLength="50" />
+    <Property Name="部門" Type="nvarchar" MaxLength="50" />
+    <Property Name="加班ID" Type="int" />
+    <Property Name="已用可用" Type="int" />
+    <Property Name="開始日期" Type="datetime" />
+    <Property Name="結束日期" Type="datetime" />
+    <Property Name="加班時數" Type="int" />
+    <Property Name="事由說明" Type="nvarchar" MaxLength="50" />
+    <Property Name="主管簽核" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="行事曆">
     <Key>
       <PropertyRef Name="EventID" />
@@ -111,10 +134,11 @@
     <Property Name="信箱" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="電話" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="居住地" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="婚姻狀況" Type="nvarchar" MaxLength="50" />
+    <Property Name="婚姻狀況" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="年資" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="薪資" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="特休" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="權限" Type="int" />
+    <Property Name="權限" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="假別">
     <Key>
@@ -166,6 +190,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_加班細項_加班別">
+    <End Role="加班別" Type="Self.加班別" Multiplicity="0..1" />
+    <End Role="加班細項" Type="Self.加班細項" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="加班別">
+        <PropertyRef Name="加班ID" />
+      </Principal>
+      <Dependent Role="加班細項">
+        <PropertyRef Name="加班ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_請假細項_假別">
     <End Role="假別" Type="Self.假別" Multiplicity="0..1" />
     <End Role="請假細項" Type="Self.請假細項" Multiplicity="*" />
@@ -183,6 +219,8 @@
     <EntitySet Name="MeetingRoom" EntityType="Self.MeetingRoom" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MeetingRoomBooking" EntityType="Self.MeetingRoomBooking" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="projectTeam" EntityType="Self.projectTeam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="加班別" EntityType="Self.加班別" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="加班細項" EntityType="Self.加班細項" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="行事曆" EntityType="Self.行事曆" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="佈告欄" EntityType="Self.佈告欄" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="表單類別" EntityType="Self.表單類別" Schema="dbo" store:Type="Tables" />
@@ -196,6 +234,10 @@
     <AssociationSet Name="FK_projectTeam_個人資料" Association="Self.FK_projectTeam_個人資料">
       <End Role="個人資料" EntitySet="個人資料" />
       <End Role="projectTeam" EntitySet="projectTeam" />
+    </AssociationSet>
+    <AssociationSet Name="FK_加班細項_加班別" Association="Self.FK_加班細項_加班別">
+      <End Role="加班別" EntitySet="加班別" />
+      <End Role="加班細項" EntitySet="加班細項" />
     </AssociationSet>
     <AssociationSet Name="FK_請假細項_假別" Association="Self.FK_請假細項_假別">
       <End Role="假別" EntitySet="假別" />

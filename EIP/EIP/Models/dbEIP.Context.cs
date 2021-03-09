@@ -30,6 +30,8 @@ namespace EIP.Models
         public virtual DbSet<MeetingRoom> MeetingRoom { get; set; }
         public virtual DbSet<MeetingRoomBooking> MeetingRoomBooking { get; set; }
         public virtual DbSet<projectTeam> projectTeam { get; set; }
+        public virtual DbSet<加班別> 加班別 { get; set; }
+        public virtual DbSet<加班細項> 加班細項 { get; set; }
         public virtual DbSet<行事曆> 行事曆 { get; set; }
         public virtual DbSet<佈告欄> 佈告欄 { get; set; }
         public virtual DbSet<表單類別> 表單類別 { get; set; }

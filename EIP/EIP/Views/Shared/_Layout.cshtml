@@ -11,104 +11,153 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
     @*引用城市選擇器*@
     <script src="~/Scripts/src/tw-city-selector.min.js"></script>
-    @*引用Fullcalender5.5.1版本*@
-    <script src="~/lib/main.min.js"></script>
-    <link href="~/lib/main.min.css" rel="stylesheet" />
-    <script src="~/lib/locales/zh-tw.js"></script>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
     <style>
-        body {
-            padding: 0;
-            background-color: #C4E1FF;
-            font-weight: bolder;
-        }
+            body {
+                padding: 0;
+                background-color: #C4E1FF;
+                font-weight: bolder;
+            }
 
-        /* 個人資訊彈出視窗*/
-        .fade {
-            opacity: 1;
-        }
+            .fade {
+                opacity: 1;
+            }
 
-        .askforleave {
-            border: 2px solid black;
-            border-radius: 20px;
-            margin: auto;
-            width: 800px;
-        }
+            .askforleave {
+                border: 2px solid black;
+                border-radius: 20px;
+                margin: auto;
+                width: 800px;
+            }
 
-        .btnSend {
-            width: 280px;
-            font-size: 20px;
-            font-weight: bold;
-        }
+            .btnSend {
+                width: 280px;
+                font-size: 20px;
+                font-weight: bold;
+            }
 
-        .pointer {
-            cursor: pointer; /*如果想要用手指效果就+這個class*/
-        }
+            .pointer {
+                cursor: pointer; /*如果想要用手指效果就+這個class*/
+            }
 
-        /*以下是SweetAlert2的套件樣式*/
-        .searchbox {
-            outline: none;
-        }
+            /*以下是SweetAlert2的套件樣式*/
+            .searchbox {
+                outline: none;
+            }
 
-        .modalbody {
-            background-color: #F0F0F0;
-        }
+            .modalbody {
+                background-color: #F0F0F0;
+            }
 
-        .FormTextShadow {
-            text-shadow: 5px 5px 20px black;
-        }
+            .FormTextShadow {
+                text-shadow: 5px 5px 20px black;
+            }
 
-        .space {
-            justify-content: space-evenly;
-        }
+            .space {
+                justify-content: space-evenly;
+            }
 
-        #nav-Add {
-            background-color: white;
-            /*  box-shadow:0px 5px 15px ;*/
-        }
+            #nav-Add {
+                background-color: white;
+                /*  box-shadow:0px 5px 15px ;*/
+            }
 
-        .TotalEMP {
-            border-radius: 5px 5px 0 0;
-            margin-bottom: -1px;
-        }
+            .TotalEMP {
+                border-radius: 5px 5px 0 0;
+                margin-bottom: -1px;
+            }
 
-        /*員工總表*/
-        .TotalWrap {
-            border-radius: 0 0 10px 10px;
-        }
+            .TotalWrap {
+                border-radius: 0 0 10px 10px;
+            }
 
-        /*跳頁搜尋鈕*/
-        .pagesearch {
-            width: 40px;
-            margin-right: 10px;
-        }
-        /*        地址選單*/
-        .zipcode {
-            width: 50px;
-            margin-left: 10px;
-            margin-bottom: 10px;
-            height: 28px;
-        }
+            /*Yuan*/
+            .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+                background-color: lightyellow;
+            }
 
-        .county {
-            margin-right: 10px;
-            margin-bottom: 10px;
-        }
+            .table {
+                background-color: white;
+                padding: 5px;
+                box-shadow: 0 1px 7px;
+            }
 
-        .live {
-            width: 400px;
-        }
+            th {
+                /*        border: 1px solid white;*/
+                text-align: center;
+                background-color: #444444;
+                color: white;
+                font-size: 1.2em;
+            }
 
-        .txtlive {
-            width: 600px;
-        }
+            td {
+                line-height: 50px;
+                color: black;
+            }
 
-        .TitleImg {
-            height: 50px;
-            width: 200px;
-        }
+            th, td {
+                text-align: center;
+                padding: 5px;
+            }
+
+            h2 {
+                text-align: center;
+                font-weight: bold;
+                margin-top: 25px;
+            }
+            /*偶數*/
+            /*tr:nth-child(even) {
+            background-color: aliceblue;
+        }*/
+            /*奇數*/
+            /*tr:nth-child(odd) {
+            background-color: azure;
+        }*/
+
+
+            /*詳細按鈕css*/
+            .button {
+                border-radius: 4px;
+                /*        border: none;*/
+                /*        color: #0066FF;*/
+                color: black;
+                font-weight: bold;
+                text-align: center;
+                font-size: 1.2em;
+                padding: 10px;
+                width: 100px;
+                transition: all 0.5s;
+                cursor: pointer;
+                margin: 3px;
+            }
+
+                .button span {
+                    cursor: pointer;
+                    display: inline-block;
+                    position: relative;
+                    transition: 0.15s;
+                }
+
+                    .button span:after {
+                        content: '\00bb';
+                        position: absolute;
+                        opacity: 0;
+                        top: 0;
+                        right: -20px;
+                        transition: 0.001s;
+                    }
+
+                .button:hover span {
+                    padding-right: 25px;
+                }
+
+                    .button:hover span:after {
+                        opacity: 1;
+                        right: 0;
+                    }
     </style>
 </head>
 <body>
@@ -126,10 +175,14 @@
                         個人功能
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="@Url.Action("BulletinBoard","BulletinBoard")">佈告欄與行事曆</a>
-                        <a class="dropdown-item" href="@Url.Action("AskFor","DDDDD")">請假申請表</a>
-                        <a class="dropdown-item" href="@Url.Action("AskforList","DDDDD")">假單總表</a>
-                        <a class="dropdown-item" href="@Url.Action("MeetingRoomBookingSearch","MeetingRoom")">會議室申請</a>
+                        <a class="dropdown-item" href="@Url.Action("BulletinBoard","BulletinBoard")">行事曆</a>
+                        <a class="dropdown-item" href="#">表單</a>
+                        <a class="dropdown-item" href="@Url.Action("AskFor","DDDDD")">差勤</a>
+                        <a class="dropdown-item" href="@Url.Action("AskforList","DDDDD")">差勤總表</a>
+                        <a class="dropdown-item" href="@Url.Action("OverTime","DDDDD")">差勤總表</a>
+                        <a class="dropdown-item" href="@Url.Action("OverTimeList","DDDDD")">差勤總表</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -258,26 +311,26 @@
                 method: "Get",
                 success: function (data) {
                     $(".addprofile").html(`
-                                                <div class="d-flex justify-content-center">
-                                                <div class="mr-1">
-                                                <p class="">中文姓名：${data.中文姓名}</p>
-                                                <p class="">英文姓名：${data.英文姓名}</p>
-                                                <label>性別：</label>
-                                            <select disabled >
-                                            <option value="性別" selected >${data.性別}</option>
-                                            </select>
-                                                <p class="">出生年月日：${data.出生年月日}</p>
-                                                <p class="">婚姻狀況：${data.婚姻狀況}</p>
-                                                <p class="">居住地：${data.居住地}</p>
-                                                </div>
-                                                <div class="ml-1">
-                                                <p class="">電話：${data.電話}</p>
-                                                <p class="">受雇日期：${data.受雇日期}</p>
-                                                <p class="">部門：${data.部門}</p>
-                                                <p class="">職稱：${data.職稱}</p>
-                                                <p class="">特休：${data.特休}</p>
-                                                <p class="">薪資：${data.薪資}</p>
-                                                </div></div>`);
+                                                    <div class="d-flex justify-content-center">
+                                                    <div class="mr-1">
+                                                    <p class="">中文姓名：${data.中文姓名}</p>
+                                                    <p class="">英文姓名：${data.英文姓名}</p>
+                                                    <label>性別：</label>
+                                                <select disabled >
+                                                <option value="性別" selected >${data.性別}</option>
+                                                </select>
+                                                    <p class="">出生年月日：${data.出生年月日}</p>
+                                                    <p class="">婚姻狀況：${data.婚姻狀況}</p>
+                                                    <p class="">居住地：${data.居住地}</p>
+                                                    </div>
+                                                    <div class="ml-1">
+                                                    <p class="">電話：${data.電話}</p>
+                                                    <p class="">受雇日期：${data.受雇日期}</p>
+                                                    <p class="">部門：${data.部門}</p>
+                                                    <p class="">職稱：${data.職稱}</p>
+                                                    <p class="">特休：${data.特休}</p>
+                                                    <p class="">薪資：${data.薪資}</p>
+                                                    </div></div>`);
                 }
             });
 
@@ -303,7 +356,7 @@
         $(".editpwsave").click(function () {
             var newpwd = $(".editpw2").val();
             var reg = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!#$%^&*()_+`\-={}\[\]:";'<>?,.\/]).{4,16}$/;
-            var flag = reg.test(newpwd);  
+            var flag = reg.test(newpwd);
             if ($(".editpw1").val() != $(".editpw2").val()) {
                 $(".editpw1").val('');
                 $(".editpw2").val('');
@@ -318,10 +371,10 @@
                 $(".editpw2").val('');
                 swal("驗證失敗", "新密碼必須由 4-16位字母、數字、特殊符號線組成...", "error");
                 return false;
-            }else {
+            } else {
                 $.ajax({
                     url: "/Home/EditPW",
-                    data: { 'pw': $(".editpw2").val()},
+                    data: { 'pw': $(".editpw2").val() },
                     method: "Get",
                     success: function () {
                         swal("成功", "修改密碼成功...", "success");

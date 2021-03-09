@@ -673,7 +673,6 @@ D:\GitHubEIP\EIP\EIP\obj\Debug\EIP.csproj.CoreCompileInputs.cache
 D:\GitHubEIP\EIP\EIP\obj\Debug\EIP.csproj.CopyComplete
 D:\GitHubEIP\EIP\EIP\obj\Debug\EIP.dll
 D:\GitHubEIP\EIP\EIP\obj\Debug\EIP.pdb
-D:\GitHubEIP\EIP\EIP\obj\Debug\EIP.csprojAssemblyReference.cache
 D:\EIP系統Github\EIP\EIP\bin\EIP.dll.config
 D:\EIP系統Github\EIP\EIP\bin\EIP.dll
 D:\EIP系統Github\EIP\EIP\bin\EIP.pdb

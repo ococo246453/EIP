@@ -68,6 +68,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="加班別">
+      <EntityTypeMapping TypeName="dbEIPModel.加班別">
+        <MappingFragment StoreEntitySet="加班別">
+          <ScalarProperty Name="加班類別" ColumnName="加班類別" />
+          <ScalarProperty Name="加班ID" ColumnName="加班ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="加班細項">
+      <EntityTypeMapping TypeName="dbEIPModel.加班細項">
+        <MappingFragment StoreEntitySet="加班細項">
+          <ScalarProperty Name="主管簽核" ColumnName="主管簽核" />
+          <ScalarProperty Name="事由說明" ColumnName="事由說明" />
+          <ScalarProperty Name="加班時數" ColumnName="加班時數" />
+          <ScalarProperty Name="結束日期" ColumnName="結束日期" />
+          <ScalarProperty Name="開始日期" ColumnName="開始日期" />
+          <ScalarProperty Name="已用可用" ColumnName="已用可用" />
+          <ScalarProperty Name="加班ID" ColumnName="加班ID" />
+          <ScalarProperty Name="部門" ColumnName="部門" />
+          <ScalarProperty Name="中文姓名" ColumnName="中文姓名" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="加班表編號" ColumnName="加班表編號" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="行事曆">
       <EntityTypeMapping TypeName="dbEIPModel.行事曆">
         <MappingFragment StoreEntitySet="行事曆">
@@ -108,6 +133,7 @@
           <ScalarProperty Name="權限" ColumnName="權限" />
           <ScalarProperty Name="特休" ColumnName="特休" />
           <ScalarProperty Name="薪資" ColumnName="薪資" />
+          <ScalarProperty Name="年資" ColumnName="年資" />
           <ScalarProperty Name="婚姻狀況" ColumnName="婚姻狀況" />
           <ScalarProperty Name="居住地" ColumnName="居住地" />
           <ScalarProperty Name="電話" ColumnName="電話" />

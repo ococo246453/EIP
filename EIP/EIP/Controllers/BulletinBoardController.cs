@@ -145,8 +145,6 @@ namespace EIP.Controllers
 
         // ---------------------------以下Fullcalendar方法----------------------------//
 
-
-        // 
         public JsonResult GetEvents()
         {
             using (dbEIPEntities db = new dbEIPEntities())
@@ -204,5 +202,6 @@ namespace EIP.Controllers
             }
             return new JsonResult { Data = new { status = status } };
         }
+
     }
 }
