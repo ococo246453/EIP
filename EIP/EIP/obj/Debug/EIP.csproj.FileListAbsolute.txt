@@ -729,3 +729,4 @@ D:\EIP系統Github\EIP\EIP\bin\roslyn\csc.exe
 D:\EIP系統Github\EIP\EIP\bin\roslyn\csi.exe
 D:\EIP系統Github\EIP\EIP\bin\roslyn\vbc.exe
 D:\EIP系統Github\EIP\EIP\bin\roslyn\VBCSCompiler.exe
+D:\GitHubEIP\EIP\EIP\obj\Debug\EIP.csprojAssemblyReference.cache

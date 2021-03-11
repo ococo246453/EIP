@@ -439,8 +439,8 @@
                                     <td>${item.性別}</td>
                                     <td>${item.電話}</td>
                                     <td>${item.部門}</td>
-                                    <td><a class="btn btn-info empedit" data-id="${item.EmployeeID}" data-toggle="modal" data-target="#EditProfile" onclick="startedit()">編輯</a></td>
-                                    <td><a class="btn btn-danger " data-id="${item.EmployeeID}" onclick="DeleteEMP()">刪除</a></td>
+                                    <td><a class="btn empedit btn-outline-primary button btnDetail" data-id="${item.EmployeeID}" data-toggle="modal" data-target="#EditProfile" onclick="startedit()">編輯</a></td>
+                                    <td><a class="btn btn-outline-danger button" data-id="${item.EmployeeID}" onclick="DeleteEMP()">刪除</a></td>
                                     </tr>`);
             })
         }
@@ -521,9 +521,6 @@
                 </select>
         </ul>
     </div>
-
-
-
     <div class="ml-5 d-flex">
         <div>
             <ul class="list-unstyled">
@@ -578,12 +575,6 @@
             </ul>
         </div>
     </div>
-
-
-
-
-
-
                     `);
                 }
             });
@@ -755,8 +746,8 @@
                                                  <td>${item.性別}</td>
                                                  <td>${item.電話}</td>
                                                  <td>${item.部門}</td>
-                                                 <td><a class="btn btn-info empedit" data-id="${item.EmployeeID}" data-toggle="modal" data-target="#EditProfile" onclick="startedit()">編輯</a></td>
-                                                 <td><a class="btn btn-danger " data-id="${item.EmployeeID}" onclick="DeleteEMP()">刪除</a></td>
+                                                 <td><a class="btn empedit btn-outline-primary button btnDetail" data-id="${item.EmployeeID}" data-toggle="modal" data-target="#EditProfile" onclick="startedit()">編輯</a></td>
+                                                 <td><a class="btn btn-outline-danger button" data-id="${item.EmployeeID}" onclick="DeleteEMP()">刪除</a></td>
                                                 </tr>`);
                             })
                         }

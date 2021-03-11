@@ -191,7 +191,6 @@ namespace EIP.Controllers
                 薪資 = mlvm.薪資,
                 權限 = mlvm.權限
             };
-
             db.Entry<個人資料>(mmb).State = EntityState.Modified;
             db.SaveChanges();
             return Json(mmb, JsonRequestBehavior.AllowGet);
